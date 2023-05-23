@@ -1,5 +1,5 @@
 import React from "react";
-import "./cangeProfile.style.scss"
+import "./changeProfile.style.scss"
 
 export default class ChangeProfile  extends React.Component {
     constructor(props) {
