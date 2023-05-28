@@ -1,29 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
-import ChangeProfile from "./components/ChangeProfile.jsx";
+//import ChangeProfile from "./components/ChangeProfile.jsx";
+import EditPost from "./components/EditPost";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      {"" && <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>}
+export default class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {posts:[]};
+    }
 
-      <ChangeProfile />
+    componentDidMount() {
+        fetch(`https://jsonplaceholder.typicode.com/posts`)
+            .then((response) => response.json())
+            .then((json) => this.setState({posts:[...json]})
+            )
+    }
 
-    </div>
-  );
+
+    render () {
+        return <div className="App">
+
+            {/*<ChangeProfile />*/}
+
+            {this.state.posts.map(content => {
+                return <EditPost key={content.id} id={content.id}/>}
+            )}
+
+        </div>
+    }
 }
 
-export default App;
+
