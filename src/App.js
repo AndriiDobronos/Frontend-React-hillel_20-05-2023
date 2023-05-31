@@ -12,10 +12,16 @@ export default class App extends React.Component {
     componentDidMount() {
         fetch(`https://jsonplaceholder.typicode.com/posts`)
             .then((response) => response.json())
-            .then((json) => this.setState({posts:[...json]})
+//            .then((json) => this.setState({posts:[...json].map(content=> content.id)})
+            .then((json) => this.setState({posts:[...json].map(content=> ({id:content.id}))})
+
             )
     }
-
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.posts !== this.state.posts ) {
+//            document.getElementById("notification2").textContent = "Элемент обновился";
+        }
+    }
 
     render () {
         return <div className="App">

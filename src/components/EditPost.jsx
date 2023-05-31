@@ -5,12 +5,13 @@ export default class EditPost extends React.Component {
         super(props)
         this.state = {title:''};
         this.handleChange = this.handleChange.bind(this);
+        this.onSaveHandler = this.onSaveHandler.bind(this);
     }
 
     componentDidMount() {
         fetch(`https://jsonplaceholder.typicode.com/posts/${this.props.id}`)
             .then((response) => response.json())
-            .then((json) => this.setState({...json})
+            .then((json) => this.setState({id:{...json}.id,title:{...json}.title,userId:{...json}.userId})
             )
     }
 
@@ -31,16 +32,22 @@ export default class EditPost extends React.Component {
     }
 
     showNotifications1 = () => {
-        this.setState({notification1:"выполнена успешно"});
+        if (this.state.toggle) {
+            return (<b> Операция редактирования выполнена успешно</b>);
+        }
+        return null
     }
 
     showNotifications2 = () => {
-        this.setState({notification2:"выполнена успешно"});
+        if (!this.state.title) {
+            return (<b> Операция удаления выполнена успешно</b>);
+        }
+        return null
     }
 
     editTitle = () => {
         this.setState({title:prompt("can be corrected",this.state.title)});
-        this.showNotifications1()
+        this.setState({toggle:true})
     }
 
     deletePost = () => {
@@ -49,22 +56,24 @@ export default class EditPost extends React.Component {
                 method: 'DELETE',
             });
             this.setState({title:''})
-            this.showNotifications2()
         }
     }
+
     onEditHandler = () => {
-        document.getElementById("editText").style.color = "red";
+
     }
 
-    onSaveHandler = () => {
+    onSaveHandler() {
         let title = document.getElementById("editText").textContent;
-        document.getElementById("editText").style.color = "black";
-        this.setState({title: title});
-        this.showNotifications1()
+        this.setState({title: title,toggle:true});
     }
 
     handleChange(event) {
         this.setState({title: event.target.value});
+    }
+
+    handleBlur = () => {
+        this.setState({toggle:true})
     }
 
     render() {
@@ -81,7 +90,7 @@ export default class EditPost extends React.Component {
                 suppressContentEditableWarning={true}
                 className="second-variant"
                 onClick={this.onEditHandler}
-                onBlur={ ()=> { this.onSaveHandler() }}
+                onBlur={ this.onSaveHandler}
                 >
                 <p>The second variant of editing with attribute "contentEditable":</p>
                 <b  id={"editText"}>{this.state.title}</b>
@@ -93,19 +102,19 @@ export default class EditPost extends React.Component {
                        size={70}
                        value={this.state.title}
                        onChange={this.handleChange}
-                       onBlur={this.showNotifications1}
+                       onBlur={this.handleBlur}
                 />
             </div>
 
             <button onClick={this.deletePost} >Delete post</button>
-            {this.state.notification1 ? <p style={{color:"red"}} >
-                <i style={{color:"blue"}}>notification:</i>
-                Операция редактирования {this.state.notification1}
-            </p> : null}
-            {this.state.notification2 ? <p style={{color:"red"}} >
-                <i style={{color:"blue"}}>notification:</i>
-                Операция удаления {this.state.notification2}
-            </p> : null}
+
+            <p id={"notification1"} style={{color:"blue"}} >
+                {this.showNotifications1()}
+            </p>
+
+            <p id={"notification2"} style={{color:"blue"}} >
+                {this.showNotifications2()}
+            </p>
         </>
     }
 }
