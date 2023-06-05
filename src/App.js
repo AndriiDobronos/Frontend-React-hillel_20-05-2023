@@ -1,37 +1,43 @@
-import './App.css';
-//import ChangeProfile from "./components/ChangeProfile.jsx";
-//import EditPost from "./components/EditPost";
 import React from "react";
-import Form from "./components/Form";
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
+import Home from "./Home";
+import Popular from "./Popular";
+import Battle from "./Battle";
+import Nav from "./Nav";
 
-export default class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {posts:[]};
-    }
-/* *************************** for EditPost.jsx *********************************
-    componentDidMount() {
-        fetch(`https://jsonplaceholder.typicode.com/posts`)
-            .then((response) => response.json())
-            .then((json) => this.setState({posts:[...json].map(content=> ({id:content.id}))})
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Nav />,
+        children: [
+            {
+                path: "/",
+                element: <Home />,
+            },
+            {
+                path: "/popular",
+                element: <Popular />
+            },
+            {
+                path: "/battle",
+                element: <Battle />,
+            },
+            {
+                path: "*",
+                element: (
+                    <h2>Error</h2>
+                )
+            }
+        ]
+    },
+]);
 
-            )
-    }  */
-
-
-    render () {
-        return <div className="App">
-
-            {/*<ChangeProfile />*/}
-
-            {/*this.state.posts.map(content => {
-                return <EditPost key={content.id} id={content.id}/>}
-            )*/}
-
-            <Form />
-
-        </div>
-    }
+const App = () => {
+    return  <div className={"container"}>
+        <RouterProvider router={router} />
+    </div>
 }
-
-
+export default App;
