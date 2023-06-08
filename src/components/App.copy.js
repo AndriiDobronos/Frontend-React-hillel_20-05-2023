@@ -2,7 +2,7 @@ import './App.css';
 //import ChangeProfile from "./components/ChangeProfile.jsx";
 //import EditPost from "./components/EditPost";
 import React from "react";
-import Form from "./components/Form";
+import Form from "./Form";
 
 export default class AppCopy extends React.Component {
     constructor(props) {

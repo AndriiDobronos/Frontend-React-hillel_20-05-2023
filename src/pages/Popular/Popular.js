@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {fetchPopularRepos} from "./api";
+import {fetchPopularRepos} from "../../api";
 import {useSearchParams} from "react-router-dom";
 import {createBrowserHistory} from "history";
 import "./popular.stile.scss"
