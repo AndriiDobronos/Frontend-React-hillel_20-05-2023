@@ -1,9 +1,21 @@
 import PlayerInput from "./PlayerInput";
+import PlayerInput2 from "./PlayerInput2";
 import PlayerPreview from "./PlayerPreview";
-import {useState} from "react";
+//import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+//import {handleSubmit} from "../../state/battle/battle.action";
+import {handleReset,handleReset2} from "../../state/battle/battle.action";
+
 
 const Battle = () => {
+    const dispatch = useDispatch()
+    const playerData = useSelector(state => state.battleReducer.playerData)
+    const loading = useSelector(state => state.popularReducer.loading)
+    const error = useSelector(state => state.popularReducer.error)
+/*
+useEffect(()=>{
+    },[playerData])
     const [playerData,setPlayerData] = useState({
         playerOneName: '',
         playerTwoName: '',
@@ -26,6 +38,14 @@ const Battle = () => {
             [`${id}Image`]: null,
         }))
     }
+*/
+
+    if (loading) {
+        return <p>Loading ...</p>
+    }
+    if (error) {
+        return <p>{error}</p>
+    }
 
     return (
         <div>
@@ -36,28 +56,27 @@ const Battle = () => {
                             avatar={playerData.playerOneImage}
                             username={playerData.playerOneName}
                         >
-                            <button className="reset" onClick={()=>handleReset('playerOne')} >Reset</button>
+                            <button className="reset" onClick={()=>dispatch(handleReset('playerOne'))} >Reset</button>
+                            {/*<button className="reset" onClick={()=>handleReset('playerOne')} >Reset</button>*/}
                         </PlayerPreview>
                     </div> :
-                    <PlayerInput
+                    <PlayerInput />}
+                    {/*<PlayerInput
                         id='playerOne'
                         label='Player 1'
-                        onSubmit={handleSubmit}
-                    />}
+//                        onSubmit={handleSubmit}
+                        onSubmit={()=>dispatch(handleSubmit())}  */}
                 {playerData.playerTwoImage ?
                     <div className='column'>
                         <PlayerPreview
                             avatar={playerData.playerTwoImage}
                             username={playerData.playerTwoName}
                         >
-                            <button className="reset" onClick={()=>handleReset('playerTwo')} >Reset</button>
+                            <button className="reset" onClick={()=>dispatch(handleReset2('playerTwo'))} >Reset</button>
+                            {/*<button className="reset" onClick={()=>handleReset('playerTwo')} >Reset</button>*/}
                         </PlayerPreview>
                     </div> :
-                    <PlayerInput
-                        id='playerTwo'
-                        label='Player 2'
-                        onSubmit={handleSubmit}
-                    />}
+                    <PlayerInput2 />}
             </div>
             {playerData.playerOneImage && playerData.playerTwoImage ?
             <Link to={{

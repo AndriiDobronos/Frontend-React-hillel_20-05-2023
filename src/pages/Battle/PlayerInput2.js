@@ -1,26 +1,24 @@
 import {useState,memo} from "react";
 import {useDispatch} from "react-redux";
-import {getUserName} from "../../state/battle/battle.action";
-import {handleSubmit} from "../../state/battle/battle.action";
+import {getUserName2, handleSubmit2} from "../../state/battle/battle.action";
 
-const PlayerInput = memo(({label,onSubmit,id}) => {
+const PlayerInput2 = memo(() => {
     const dispatch = useDispatch()
 
     const [userName, setUserName] = useState('')
 
     const handlerSubmit = (event) => {
         event.preventDefault &&
-        dispatch(handleSubmit('playerOne',userName))
+        dispatch(handleSubmit2('playerTwo',userName));
     }
-     dispatch(getUserName(userName))
 
+    dispatch(getUserName2(userName))
 
     return (
         <form  className="column" onSubmit={handlerSubmit}>
-            {/*<label htmlFor={label}>{label}</label>*/}
-            <label htmlFor='Player 1'>Player 1</label>
+            <label htmlFor='Player 2'>Player 2</label>
             <input
-                id='Player 1'
+                id='Player 2'
                 type="text"
                 placeholder='GitHub UserName'
                 autoComplete='off'
@@ -37,4 +35,5 @@ const PlayerInput = memo(({label,onSubmit,id}) => {
         </form>
     )
 })
-export default PlayerInput
+export default PlayerInput2
+
