@@ -6,7 +6,8 @@ const initialState = {
     repos: [],
     error: null,
 }
-export const popularReducer = (state = initialState, action) => {
+
+ export const popularReducer = (state = initialState, action) => {
     switch(action.type) {
         case POPULAR.SET_SELECTED_LANGUAGE:
             return {
@@ -36,3 +37,4 @@ export const popularReducer = (state = initialState, action) => {
             return state;
     }
 }
+//export default popularReducer;

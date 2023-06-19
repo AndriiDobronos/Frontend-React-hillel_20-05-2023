@@ -1,14 +1,16 @@
 import {useSelector} from "react-redux";
 
 const Repos = () => {
-    const loading = useSelector(state => state.popularReducer.loading)
-    const repos = useSelector(state => state.popularReducer.repos)
-    const error = useSelector(state => state.popularReducer.error)
+    const loading = useSelector(state => state.popular.loading)
+    const repos = useSelector(state => state.popular.repos)
+    const error = useSelector(state => state.popular.error)
+    console.log(repos,"repos")
+    console.log(loading,"loading")
     if (loading) {
         return <p>Loading ...</p>
     }
     if (error) {
-        return <p>{"error"}</p>
+        return <p>{error}</p>
     }
 
     return (
@@ -22,7 +24,7 @@ const Repos = () => {
                                 <img src={repo.owner.avatar_url} alt="Avatar" className="avatar"/>
                             </li>
                             <li>
-                                <a href={repo.html_url} target="_blank">{repo.name}</a>
+                                <a href={repo.html_url} target="_blank" rel='noreferrer'>{repo.name}</a>
                             </li>
                             <li>@{repo.owner.login}</li>
                             <li>{repo.stargazers_count} stars</li>

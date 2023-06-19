@@ -5,14 +5,14 @@ import PlayerPreview from "./PlayerPreview";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 //import {handleSubmit} from "../../state/battle/battle.action";
-import {handleReset,handleReset2} from "../../state/battle/battle.action";
-
+//import {handleReset,handleReset2} from "../../state/battle/battle.action";
+import {handleReset,handleReset2} from "../../state/battle/battle.slice";
 
 const Battle = () => {
     const dispatch = useDispatch()
-    const playerData = useSelector(state => state.battleReducer.playerData)
-    const loading = useSelector(state => state.popularReducer.loading)
-    const error = useSelector(state => state.popularReducer.error)
+    const playerData = useSelector(state => state.battle.playerData)
+    const loading = useSelector(state => state.battle.loading)
+    const error = useSelector(state => state.battle.error)
 /*
 useEffect(()=>{
     },[playerData])

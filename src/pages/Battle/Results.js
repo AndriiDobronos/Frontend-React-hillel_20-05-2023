@@ -10,10 +10,15 @@ import {getResult} from "../../state/battle/battle.thunk";
 const Results = () => {
     const dispatch = useDispatch()
     const location = useLocation()
-    const loading = useSelector(state => state.battleReducer.loading)
-    const error = useSelector(state => state.battleReducer.error)
-    const winner = useSelector(state => state.battleReducer.winner)
-    const loser = useSelector(state => state.battleReducer.loser)
+    const loading = useSelector(state => state.battle.loading)
+    const error = useSelector(state => state.battle.error)
+    const winner = useSelector(state => state.battle.winner)
+    const loser = useSelector(state => state.battle.loser)
+
+//    const loading = useSelector(state => state.battleReducer.loading)
+//    const error = useSelector(state => state.battleReducer.error)
+//    const winner = useSelector(state => state.battleReducer.winner)
+//    const loser = useSelector(state => state.battleReducer.loser)
 
 //    const [loading, setLoading] = useState(true)
 //    const [error, setError] = useState(null)

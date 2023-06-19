@@ -1,7 +1,9 @@
 import {useState,memo} from "react";
 import {useDispatch} from "react-redux";
-import {getUserName} from "../../state/battle/battle.action";
-import {handleSubmit} from "../../state/battle/battle.action";
+//import {getUserName} from "../../state/battle/battle.action";
+//import {handleSubmit} from "../../state/battle/battle.action";
+import {getUserName} from "../../state/battle/battle.slice";
+import {handleSubmit} from "../../state/battle/battle.slice";
 
 const PlayerInput = memo(({label,onSubmit,id}) => {
     const dispatch = useDispatch()
