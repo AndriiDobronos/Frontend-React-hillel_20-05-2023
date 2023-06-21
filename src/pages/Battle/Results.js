@@ -36,7 +36,7 @@ const Results = () => {
         })
         .catch((error) => dispatch(getParamsFailureAction(error)))
         .finally(() => dispatch(resetLoadingAction()))
-    })()   
+    })()
 /*
        makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)])
            .then(([winner, loser]) => {
