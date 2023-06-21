@@ -3,7 +3,7 @@ import {
     setWinnerAction,
     setLoserAction,
     getParamsFailureAction, resetLoadingAction
-} from "./battle.action";
+} from "./battle.reducer";
 import {makeBattle} from "../../requests.js";
 
 export const getResult = (params) => (dispatch) => {
@@ -22,7 +22,7 @@ import {updateLanguage} from "./popular.slice";
 
 export const getRepos = createAsyncThunk(
     'popular/getRepos',
-    async (selectedLanguage ,{rejectWitchValue},dispatch) => {
+    async (selectedLanguage ,{rejectWitchValue,dispatch}) => {
         dispatch(updateLanguage(selectedLanguage));
         try {
             return await getReposRequest(selectedLanguage);
@@ -30,21 +30,34 @@ export const getRepos = createAsyncThunk(
             return rejectWitchValue(error);
         }
     },);
-*/
 
+    const  getResult = (async () => {
+    return  await makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)])
+        .then(([winner, loser]) => {
+            dispatch(setWinnerAction(winner));
+            dispatch(setLoserAction(loser));
+        })
+        .catch((error) => dispatch(getParamsFailureAction(error)))
+        .finally(() => dispatch(resetLoadingAction()))
+    })()
+*/
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {makeBattle} from "../../requests.js";
-import {setWinnerAction, setLoserAction} from "./battle.slice";
+import {setWinnerAction, setLoserAction, getParamsFailureAction} from "./battle.slice";
+import {resetLoadingAction} from "./battle.slice";
 
 export const getResult = createAsyncThunk(
+
     'battle/getResult',
-    async (params ,{rejectWitchValue},dispatch,winner,loser) => {
+    async (params ,{rejectWitchValue,dispatch}) => {
         try {
-            return (
-                await makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)]),
-            dispatch(setLoserAction(loser)),
-            dispatch(setWinnerAction(winner))
-        )
+            return await dispatch(makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)]))
+                .then(([winner, loser]) => {
+                dispatch(setWinnerAction(winner))
+                dispatch(setLoserAction(loser))
+                .catch((error) => dispatch(getParamsFailureAction(error)))
+                .finally(() => dispatch(resetLoadingAction()))
+            })
         } catch (error) {
             return rejectWitchValue(error);
         }

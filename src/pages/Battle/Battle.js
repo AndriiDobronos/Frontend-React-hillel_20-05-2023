@@ -13,6 +13,7 @@ const Battle = () => {
     const playerData = useSelector(state => state.battle.playerData)
     const loading = useSelector(state => state.battle.loading)
     const error = useSelector(state => state.battle.error)
+
 /*
 useEffect(()=>{
     },[playerData])
@@ -39,14 +40,16 @@ useEffect(()=>{
         }))
     }
 */
-
+//    console.log(loading,"loading")
+//    console.log(playerData,'playerData')
+/*
     if (loading) {
         return <p>Loading ...</p>
     }
     if (error) {
         return <p>{error}</p>
     }
-
+*/
     return (
         <div>
             <div className='row'>

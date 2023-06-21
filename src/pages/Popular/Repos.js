@@ -4,8 +4,6 @@ const Repos = () => {
     const loading = useSelector(state => state.popular.loading)
     const repos = useSelector(state => state.popular.repos)
     const error = useSelector(state => state.popular.error)
-    console.log(repos,"repos")
-    console.log(loading,"loading")
     if (loading) {
         return <p>Loading ...</p>
     }

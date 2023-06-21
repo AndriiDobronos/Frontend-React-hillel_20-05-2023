@@ -69,6 +69,13 @@ const battleSlice = createSlice({
         setLoserAction: (state,action) => {
             state.loser = action.payload;
         },
+        resetLoadingAction: (state,action) =>{
+            state.loading = false ;
+        },
+        getParamsFailureAction: (state,action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getResult.pending,
@@ -82,6 +89,7 @@ const battleSlice = createSlice({
                 state.loading = false;
                 state.winner = payload;
                 state.loser = payload;
+                console.log(payload,'payload....')
             },
         );
         builder.addCase(getResult.rejected,
@@ -93,7 +101,8 @@ const battleSlice = createSlice({
     },
 
 });
-export const {getUserName, getUserName2,handleSubmit,handleSubmit2,handleReset,handleReset2,setWinnerAction,setLoserAction} = battleSlice.actions;
+export const {getUserName, getUserName2,handleSubmit,handleSubmit2,handleReset,
+    handleReset2,setWinnerAction,setLoserAction,resetLoadingAction,getParamsFailureAction} = battleSlice.actions;
 
 export default battleSlice.reducer
 

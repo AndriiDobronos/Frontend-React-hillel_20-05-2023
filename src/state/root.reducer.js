@@ -4,5 +4,5 @@ import {battleReducer } from "./battle/battle.reducer";
 
 export default combineReducers({
     popularReducer,
-    battleReducer
+    battleReducer,
 })

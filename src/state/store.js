@@ -22,8 +22,8 @@ import battle from "./battle/battle.slice"
 
 const store = configureStore({
     reducer: {
-        popular,
-        battle,
+        popular:popular,
+        battle: battle,
     },
     middleware: () =>
         getDefaultMiddleware().concat(
