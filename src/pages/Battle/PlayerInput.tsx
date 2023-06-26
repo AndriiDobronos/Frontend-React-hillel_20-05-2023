@@ -1,18 +1,23 @@
-import {useState,memo} from "react";
+import {useState, memo, ChangeEvent, FormEvent, ReactElement,FC} from "react";
 import {useDispatch} from "react-redux";
 //import {getUserName} from "../../state/battle/battle.action";
 //import {handleSubmit} from "../../state/battle/battle.action";
 import {getUserName} from "../../state/battle/battle.slice";
 import {handleSubmit} from "../../state/battle/battle.slice";
+interface IProps {
+    id:string;
+    label:string;
+    onSubmit: (id:string, userName:string)=>void;
+}
 
-const PlayerInput = memo(({label,onSubmit,id}) => {
+const PlayerInput:FC<IProps> = memo(({label,onSubmit,id}):ReactElement  => {
     const dispatch = useDispatch()
 
-    const [userName, setUserName] = useState('')
+    const [userName, setUserName] = useState<string>('')
 
-    const handlerSubmit = (event) => {
+    const handlerSubmit = (event: FormEvent): void => {
         event.preventDefault &&
-        dispatch(handleSubmit('playerOne',userName))
+        dispatch(handleSubmit(_,_,'playerOne',userName))
     }
      dispatch(getUserName(userName))
 
@@ -27,7 +32,7 @@ const PlayerInput = memo(({label,onSubmit,id}) => {
                 placeholder='GitHub UserName'
                 autoComplete='off'
                 value={userName}
-                onChange={(event) => setUserName(event.target.value)}
+                onChange={(event: ChangeEvent<HTMLInputElement>):void => setUserName(event.target.value)}
             />
             <button
                 className="button"

@@ -1,8 +1,9 @@
 import {memo} from "react";
 import {Link} from "react-router-dom";
 import PlayerPreview from "./PlayerPreview";
+import {ReactElement, FC} from "react";
 
-const Player = memo(({label, profile }) => {
+const Player:FC = memo(({label, profile }):ReactElement  => {
     return (
         <div>
             <h1 className='header'>{label}</h1>

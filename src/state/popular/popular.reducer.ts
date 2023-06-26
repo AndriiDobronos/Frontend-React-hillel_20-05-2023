@@ -1,13 +1,15 @@
 import {POPULAR} from "./popular.constants";
+import {IPopularStore} from "../types/popular.types";
+import {AnyAction} from "redux";
 
-const initialState = {
+const initialState: IPopularStore = {
     selectedLanguage: 'All',
     loading: false,
     repos: [],
     error: null,
 }
 
- export const popularReducer = (state = initialState, action) => {
+ export const popularReducer = (state:IPopularStore = initialState, action: AnyAction ): IPopularStore => {
     switch(action.type) {
         case POPULAR.SET_SELECTED_LANGUAGE:
             return {

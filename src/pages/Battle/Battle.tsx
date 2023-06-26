@@ -7,11 +7,13 @@ import {useDispatch, useSelector} from "react-redux";
 //import {handleSubmit} from "../../state/battle/battle.action";
 //import {handleReset,handleReset2} from "../../state/battle/battle.action";
 import {handleReset,handleReset2} from "../../state/battle/battle.slice";
+import {FC,ReactElement} from "react";
+import {IPlayerData} from "../../state/types/battle.types";
 
-const Battle = () => {
+const Battle:FC = ():ReactElement => {
     const dispatch = useDispatch()
-    const playerData = useSelector(state => state.battle.playerData)
-    const loading = useSelector(state => state.battle.loading)
+    const playerData:IPlayerData = useSelector(state => state.battle.playerData)
+    const loading: boolean = useSelector(state => state.battle.loading)
     const error = useSelector(state => state.battle.error)
 
 /*
@@ -59,7 +61,7 @@ useEffect(()=>{
                             avatar={playerData.playerOneImage}
                             username={playerData.playerOneName}
                         >
-                            <button className="reset" onClick={()=>dispatch(handleReset('playerOne'))} >Reset</button>
+                            <button className="reset" onClick={()=>dispatch(handleReset(_,_,'playerOne','playerTwo'))} >Reset</button>
                             {/*<button className="reset" onClick={()=>handleReset('playerOne')} >Reset</button>*/}
                         </PlayerPreview>
                     </div> :
@@ -75,7 +77,7 @@ useEffect(()=>{
                             avatar={playerData.playerTwoImage}
                             username={playerData.playerTwoName}
                         >
-                            <button className="reset" onClick={()=>dispatch(handleReset2('playerTwo'))} >Reset</button>
+                            <button className="reset" onClick={()=>dispatch(handleReset2(_,_,'playerOne','playerTwo'))} >Reset</button>
                             {/*<button className="reset" onClick={()=>handleReset('playerTwo')} >Reset</button>*/}
                         </PlayerPreview>
                     </div> :

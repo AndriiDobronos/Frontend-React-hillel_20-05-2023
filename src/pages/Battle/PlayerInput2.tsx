@@ -1,16 +1,16 @@
-import {useState,memo} from "react";
+import {useState, memo, FormEvent, ReactElement,FC} from "react";
 import {useDispatch} from "react-redux";
 //import {getUserName2, handleSubmit2} from "../../state/battle/battle.action";
 import {getUserName2, handleSubmit2} from "../../state/battle/battle.slice";
 
-const PlayerInput2 = memo(() => {
+const PlayerInput2:FC = memo(():ReactElement => {
     const dispatch = useDispatch()
 
     const [userName, setUserName] = useState('')
 
-    const handlerSubmit = (event) => {
+    const handlerSubmit = (event:FormEvent):void => {
         event.preventDefault &&
-        dispatch(handleSubmit2('playerTwo',userName));
+        dispatch(handleSubmit2(_,_,'playerTwo',userName));
     }
 
     dispatch(getUserName2(userName))

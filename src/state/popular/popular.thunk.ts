@@ -1,6 +1,6 @@
 /*
 import {getReposFailureAction, getReposLoadingAction, getReposSuccessAction, updateLanguage} from "./popular.actions";
-import {getReposRequest} from "../../requests.js";
+import {getReposRequest} from "../../requests.ts";
 
 
 export const getRepos = (selectedLanguage) => (dispatch) => {
@@ -14,12 +14,12 @@ export const getRepos = (selectedLanguage) => (dispatch) => {
 */
 
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {getReposRequest } from "../../requests.js";
+import {getReposRequest } from "../../requests";
 import {updateLanguage} from "./popular.slice";
 
 export const getRepos =  createAsyncThunk(
     'popular/getRepos',
-     async (selectedLanguage,{rejectWitchValue,dispatch}) => {
+     async (selectedLanguage: string,{rejectWitchValue,dispatch}): Promise<any> => {
         dispatch(updateLanguage(selectedLanguage));
     try {
         return await getReposRequest(selectedLanguage);

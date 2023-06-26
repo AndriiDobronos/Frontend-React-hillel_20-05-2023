@@ -5,16 +5,18 @@ import Player from "./Player";
 import {useDispatch, useSelector} from "react-redux";
 import {getParamsFailureAction,setWinnerAction,setLoserAction } from "../../state/battle/battle.slice";
 import {resetLoadingAction} from "../../state/battle/battle.slice";
+import {ReactElement, FC} from "react";
+import {IBattleStore} from "../../state/types/battle.types";
 //import {getResult} from "../../state/battle/battle.thunk";
 
-const Results = () => {
+const Results:FC = ():ReactElement => {
     const dispatch = useDispatch()
     const location = useLocation()
-    const params = new URLSearchParams(location.search)
-    const loading = useSelector(state => state.battle.loading)
-    const error = useSelector(state => state.battle.error)
-    const winner = useSelector(state => state.battle.winner)
-    const loser = useSelector(state => state.battle.loser)
+    const params:{[key:string]:any} = new URLSearchParams(location.search)
+    const loading:boolean = useSelector(state => state.battle.loading)
+    const error:{[key:string]:string} | null = useSelector(state => state.battle.error)
+    const winner:{profile:string,score:number | null} = useSelector(state => state.battle.winner)
+    const loser:{profile:string,score:number | null} = useSelector(state => state.battle.loser)
 
 //    const loading = useSelector(state => state.battleReducer.loading)
 //    const error = useSelector(state => state.battleReducer.error)
@@ -27,9 +29,9 @@ const Results = () => {
 //    const [loser, setLoser] = useState(null)
 
     useEffect(() => {
-//        dispatch(getResult(params))
+//        dispatch(getResult(params));
     const  getResult = (async () => {
-    return  await makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)])
+    return await makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)])
         .then(([winner, loser]) => {
             dispatch(setWinnerAction(winner));
             dispatch(setLoserAction(loser));
@@ -56,7 +58,7 @@ const Results = () => {
         return <p>Loading ...</p>
     }
     if (error) {
-        return <p>{error}</p>
+        return <p>{error.message}</p>
     }
 
     return (

@@ -1,7 +1,9 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {ActionReducerMapBuilder, createSlice,} from "@reduxjs/toolkit";
 import {getResult} from "./battle.thunk";
+import {IBattleStore} from "../types/battle.types";
+import {AnyAction} from "redux";
 
-const initialState = {
+const initialState:IBattleStore = {
     playerData: {
         playerOneName: '',
         playerTwoName: '',
@@ -21,8 +23,8 @@ const battleSlice = createSlice({
     name: 'battle',
     initialState,
     reducers: {
-        handleSubmit: (state , action,userName1 = state.userName1,
-            userName2 = state.userName2) => {
+        handleSubmit: (state:IBattleStore , action:AnyAction ,userName1:string = state.userName1,
+            userName2:string = state.userName2) => {
         state.playerData =  {
             playerOneName : `${userName1}`,
             playerTwoName: `${userName2}`,
@@ -30,8 +32,8 @@ const battleSlice = createSlice({
             playerTwoImage: (userName2 ? ` https://github.com/${userName2}.png?size200`: null),
                 }
             },
-        handleSubmit2: (state , action,userName1 = state.userName1,
-                       userName2 = state.userName2) => {
+        handleSubmit2: (state:IBattleStore , action:AnyAction, userName1:string = state.userName1,
+                       userName2:string = state.userName2) => {
             state.playerData =  {
                 playerOneName : `${userName1}`,
                 playerTwoName: `${userName2}`,
@@ -39,8 +41,8 @@ const battleSlice = createSlice({
                 playerTwoImage: ` https://github.com/${userName2}.png?size200`,
             }
         },
-        handleReset: (state , action, userName1 = state.userName1,
-                        userName2 = state.userName2) => {
+        handleReset: (state:IBattleStore , action:AnyAction , userName1:string = state.userName1,
+                        userName2:string = state.userName2) => {
             state.playerData =  {
                 playerOneName : '',
                 playerTwoName: state.userName2,
@@ -48,8 +50,8 @@ const battleSlice = createSlice({
                 playerTwoImage: ` https://github.com/${userName2}.png?size200`,
             }
         },
-        handleReset2: (state , action,userName1 = state.userName1,
-                      userName2 = state.userName2) => {
+        handleReset2: (state:IBattleStore , action:AnyAction, userName1:string = state.userName1,
+                      userName2:string = state.userName2) => {
             state.playerData =  {
                 playerOneName : state.userName1,
                 playerTwoName: '',
@@ -57,43 +59,42 @@ const battleSlice = createSlice({
                 playerTwoImage: null,
             }
         },
-        getUserName: (state, action) => {
+        getUserName: (state:IBattleStore , action:AnyAction ):void => {
             state.userName1 = action.payload;
         },
-        getUserName2: (state, action) => {
+        getUserName2: (state:IBattleStore, action:AnyAction ):void => {
             state.userName2 = action.payload;
         },
-        setWinnerAction: (state,action) => {
+        setWinnerAction: (state:IBattleStore ,action:AnyAction):void => {
             state.winner = action.payload;
         },
-        setLoserAction: (state,action) => {
+        setLoserAction: (state:IBattleStore ,action:AnyAction ):void => {
             state.loser = action.payload;
         },
-        resetLoadingAction: (state,action) =>{
+        resetLoadingAction: (state:IBattleStore ,action:AnyAction ):void =>{
             state.loading = false ;
         },
-        getParamsFailureAction: (state,action) => {
+        getParamsFailureAction: (state:IBattleStore ,action:AnyAction ):void => {
             state.loading = false;
             state.error = action.payload;
         },
     },
-    extraReducers: (builder) => {
+    extraReducers: (builder:ActionReducerMapBuilder<IBattleStore>) => {
         builder.addCase(getResult.pending,
-            (state) => {
+            (state:IBattleStore ):void => {
                 state.error = null;
                 state.loading = true;
             },
         );
         builder.addCase(getResult.fulfilled,
-            (state, {payload}) => {
+            (state:IBattleStore , {payload} ):void => {
                 state.loading = false;
                 state.winner = payload;
                 state.loser = payload;
-                console.log(payload,'payload....')
             },
         );
         builder.addCase(getResult.rejected,
-            (state, {payload}) => {
+            (state:IBattleStore , {payload}:AnyAction ):void => {
                 state.loading = false;
                 state.error = payload;
             },
