@@ -1,11 +1,15 @@
 import {useSelector} from "react-redux";
+import Loader from "./Loader";
+import {FC, ReactElement} from "react";
+import {ErrorT, ReposT, IRepos} from "../../state/types/popular.types";
+import {RootState} from "../../state/store";
 
-const Repos = () => {
-    const loading = useSelector(state => state.popular.loading)
-    const repos = useSelector(state => state.popular.repos)
-    const error = useSelector(state => state.popular.error)
+const Repos:FC  = ():ReactElement  => {
+    const loading:boolean = useSelector((state: RootState):boolean => state.popular.loading)
+    const repos:ReposT = useSelector((state:RootState):ReposT => state.popular.repos)
+    const error: ErrorT = useSelector((state: RootState):ErrorT => state.popular.error)
     if (loading) {
-        return <p>Loading ...</p>
+        return <Loader />
     }
     if (error) {
         return <p>{error}</p>
@@ -13,7 +17,7 @@ const Repos = () => {
 
     return (
         <ul className="popular-list">
-            {repos.map((repo,index) => {
+            {repos.map((repo:IRepos ,index:number):ReactElement => {
                 return (
                     <li key={repo.id} className='popular-item' >
                         <div className="popular-rank">#{index + 1}</div>

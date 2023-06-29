@@ -5,6 +5,7 @@ import Player from "./Player";
 import {useDispatch, useSelector} from "react-redux";
 import {getParamsFailureAction,setWinnerAction,setLoserAction } from "../../state/battle/battle.slice";
 import {resetLoadingAction} from "../../state/battle/battle.slice";
+import Loader from "../Popular/Loader";
 //import {getResult} from "../../state/battle/battle.thunk";
 
 const Results = () => {
@@ -53,7 +54,7 @@ const Results = () => {
     },[location])
 
     if (loading) {
-        return <p>Loading ...</p>
+        return <Loader />
     }
     if (error) {
         return <p>{error}</p>

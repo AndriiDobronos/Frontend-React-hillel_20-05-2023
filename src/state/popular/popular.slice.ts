@@ -1,36 +1,38 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {getRepos} from "./popular.thunk";
+import {IPopularStore} from "../types/popular.types";
+import {Slice, AnyAction, ActionReducerMapBuilder} from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState:IPopularStore = {
     selectedLanguage: 'All',
     loading: false,
     repos: [],
     error: null,
 };
 
-const popularSlice = createSlice({
+const popularSlice:Slice<IPopularStore> = createSlice({
     name: 'popular',
     initialState,
     reducers: {
-        updateLanguage: (state,action) => {
+        updateLanguage: (state:IPopularStore,action:AnyAction):void => {
             state.selectedLanguage = action.payload;
         },
     },
-    extraReducers: (builder) => {
+    extraReducers: (builder:ActionReducerMapBuilder<IPopularStore>) => {
     builder.addCase(getRepos.pending,
-        (state) => {
+        (state:IPopularStore) => {
         state.error = null;
         state.loading = true;
         },
     );
     builder.addCase(getRepos.fulfilled,
-        (state, {payload}) => {
+        (state:IPopularStore, {payload}:AnyAction):void => {
             state.loading = false;
             state.repos = payload;
         },
     );
     builder.addCase(getRepos.rejected,
-        (state, {payload}) => {
+        (state:IPopularStore, {payload}:AnyAction):void => {
             state.loading = false;
             state.error = payload;
         },

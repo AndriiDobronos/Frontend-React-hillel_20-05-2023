@@ -1,7 +1,10 @@
-const PopularList = (props) => {
+import {ReactElement,FC} from "react";
+import {IRepos} from "../../state/types/battle.types";
+
+const PopularList:FC<IRepos> = (props:IRepos):ReactElement  => {
     return (
         <ul className="popular-list">
-            {props.repos.map((repo, index) => {
+            {props.repos.map((repo, index:number) => {
                 return (
                     <li key={repo.id} className="popular-item">
                         <div className="popular-rank">#{index+1}</div>

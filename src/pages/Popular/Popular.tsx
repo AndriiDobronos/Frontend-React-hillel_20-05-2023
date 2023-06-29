@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {FC, ReactElement, useEffect, useState} from "react";
 //import {fetchPopularRepos} from "../../requests";
 //import {useSearchParams} from "react-router-dom";
 //import {createBrowserHistory} from "history";
@@ -15,7 +15,7 @@ import SelectLanguage from "./SelectLanguage";
 //const languages = ['All', 'Javascript', 'Ruby','Java', 'CSS', 'Python'];
 //const history = createBrowserHistory();
 
-const Popular = () => {
+const Popular:FC = ():ReactElement => {
 //    const dispatch = useDispatch()
 //    const selectedLanguage = useSelector(state => state.popularReducer.selectedLanguage)
 //    const loading = useSelector(state => state.popularReducer.loading)
@@ -28,7 +28,6 @@ const Popular = () => {
 //    const [error, setError] = useState(null)
 //    const [searchParams, setSearchParams] = useSearchParams();
 //    const [query, setQuery] = useState(searchParams.get("query"));
-
 
 
 //    const handleSelect = (event)=>setSelectLanguage(event.currentTarget.innerText)

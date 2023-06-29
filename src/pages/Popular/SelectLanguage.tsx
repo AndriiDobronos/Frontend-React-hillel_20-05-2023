@@ -1,17 +1,18 @@
 import {getRepos} from "../../state/popular/popular.thunk";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {ReactElement,FC, useEffect} from "react";
 import {createBrowserHistory} from "history";
-import {updateLanguage} from "../../state/popular/popular.slice";
+import {AppDispatch, RootState} from "../../state/store";
+//import {updateLanguage} from "../../state/popular/popular.slice";
 
-const languages = ['All', 'Javascript', 'Ruby','Java', 'CSS', 'Python'];
+const languages:string[] = ['All', 'Javascript', 'Ruby','Java', 'CSS', 'Python'];
 const history = createBrowserHistory();
 
 
-const SelectLanguage = () =>{
-    const dispatch = useDispatch()
+const SelectLanguage:FC = ():ReactElement  =>{
+    const dispatch = useDispatch<AppDispatch>()
 //    const selectedLanguage = useSelector(state => state.popularReducer.selectedLanguage)
-    const selectedLanguage = useSelector(state => state.popular.selectedLanguage)
+    const selectedLanguage = useSelector((state:RootState):string => state.popular.selectedLanguage)
 //    const repos = useSelector(state => state.popular.repos)
 
     useEffect (() => {
@@ -21,7 +22,7 @@ const SelectLanguage = () =>{
 
     return (
         <ul className='languages'>
-            {languages.map((language, index) => (
+            {languages.map((language:string, index:number):ReactElement => (
                 <li key={index}
                     style={{color: language === selectedLanguage ? '#d0021b' : '#000000'}}
                     onClick={() => dispatch(getRepos(language))}
