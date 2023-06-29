@@ -1,6 +1,8 @@
 import {BATTLE} from "./battle.constants";
+import {IBattleStore} from "../types/battle.types";
+import {AnyAction} from "redux";
 
-const initialState = {
+const initialState:IBattleStore = {
     playerData: {
         playerOneName: '',
         playerTwoName: '',
@@ -15,8 +17,8 @@ const initialState = {
     winner: null,
     loser: null,
 }
-export const battleReducer = (state = initialState, action,userName1= state.userName1,
-                              userName2 = state.userName2) => {
+export const battleReducer = (state:IBattleStore = initialState, action:AnyAction,userName1= state.userName1,
+                              userName2 = state.userName2):IBattleStore => {
     switch (action.type) {
         case BATTLE.SET_PLAYER_DATA:
             return   {

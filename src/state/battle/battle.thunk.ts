@@ -6,14 +6,14 @@ import {resetLoadingAction} from "./battle.slice";
 
 export const getResult = createAsyncThunk(
     'battle/getResult',
-    async (params ,{rejectWitchValue,dispatch}) => {
+    async (params:{[key:string]:any} ,{rejectWitchValue,dispatch}):Promise<any> => {
         try {
             return await dispatch(makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)]))
                 .then(([winner, loser]) => {
                 dispatch(setWinnerAction(winner))
                 dispatch(setLoserAction(loser))
                 .catch((error) => dispatch(getParamsFailureAction(error)))
-                .finally(() => dispatch(resetLoadingAction()))
+                .finally(() => dispatch(resetLoadingAction))
             })
         } catch (error) {
             return rejectWitchValue(error);

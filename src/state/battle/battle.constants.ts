@@ -1,4 +1,4 @@
-export const BATTLE = {
+export const BATTLE: {[key:string]: string} = {
     SET_PLAYER_DATA: 'BATTLE.SET_PLAYER_DATA',
     SET_PLAYER2_DATA: 'BATTLE.SET_PLAYER2_DATA',
     HANDLE_RESET: 'BATTLE.HANDLE_RESET',
