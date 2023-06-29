@@ -1,21 +1,26 @@
-import {useState,memo} from "react";
+import {useState, memo, ReactElement, FC, FormEvent} from "react";
 import {useDispatch} from "react-redux";
 //import {getUserName} from "../../state/battle/battle.action";
 //import {handleSubmit} from "../../state/battle/battle.action";
 import {getUserName} from "../../state/battle/battle.slice";
 import {handleSubmit} from "../../state/battle/battle.slice";
-
-const PlayerInput = memo(({label,onSubmit,id}) => {
+/*
+interface IProps {
+    id:string;
+    label:string;
+    onSubmit: (id:string, userName:string)=>void;
+}
+*/
+const PlayerInput:FC = memo(():ReactElement => {
     const dispatch = useDispatch()
 
-    const [userName, setUserName] = useState('')
+    const [userName, setUserName] = useState<string>('')
 
-    const handlerSubmit = (event) => {
+    const handlerSubmit = (event:FormEvent):void => {
         event.preventDefault &&
         dispatch(handleSubmit('playerOne',userName))
     }
-     dispatch(getUserName(userName))
-
+    dispatch(getUserName(userName))
 
     return (
         <form  className="column" onSubmit={handlerSubmit}>

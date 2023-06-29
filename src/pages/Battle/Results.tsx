@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {FC, ReactElement, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {makeBattle} from "../../requests";
 import Player from "./Player";
@@ -8,14 +8,14 @@ import {resetLoadingAction} from "../../state/battle/battle.slice";
 import Loader from "../Popular/Loader";
 //import {getResult} from "../../state/battle/battle.thunk";
 
-const Results = () => {
+const Results:FC  = ():ReactElement => {
     const dispatch = useDispatch()
     const location = useLocation()
-    const params = new URLSearchParams(location.search)
-    const loading = useSelector(state => state.battle.loading)
-    const error = useSelector(state => state.battle.error)
-    const winner = useSelector(state => state.battle.winner)
-    const loser = useSelector(state => state.battle.loser)
+    const params:{[key:string]:any}  = new URLSearchParams(location.search)
+    const loading:boolean = useSelector(state => state.battle.loading)
+    const error:{[key:string]:string} | null = useSelector(state => state.battle.error)
+    const winner:{profile:string,score:number | null} = useSelector(state => state.battle.winner)   //:{profile:string,score:number | null}
+    const loser:{profile:string,score:number | null} = useSelector(state => state.battle.loser)   //:{profile:string,score:number | null}
 
 //    const loading = useSelector(state => state.battleReducer.loading)
 //    const error = useSelector(state => state.battleReducer.error)

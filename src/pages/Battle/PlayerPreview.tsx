@@ -1,7 +1,7 @@
-import {Children, cloneElement} from "react";
+import {Children, cloneElement, FC, ReactElement} from "react";
 import {memo} from "react";
 
-const PlayerPreview = memo(({avatar, username, children, render}) => {
+const PlayerPreview:FC = memo(({avatar, username, children, render}):ReactElement => {
     return (
         <div>
             <div className="column">

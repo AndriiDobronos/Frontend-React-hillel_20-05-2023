@@ -21,7 +21,7 @@ const battleSlice = createSlice({
     name: 'battle',
     initialState,
     reducers: {
-        handleSubmit: (state , action,userName1 = state.userName1,
+        handleSubmit: (state ,action,userName1 = state.userName1,
             userName2 = state.userName2) => {
         state.playerData =  {
             playerOneName : `${userName1}`,
@@ -30,7 +30,7 @@ const battleSlice = createSlice({
             playerTwoImage: (userName2 ? ` https://github.com/${userName2}.png?size200`: null),
                 }
             },
-        handleSubmit2: (state , action,userName1 = state.userName1,
+        handleSubmit2: (state , action, userName1 = state.userName1,
                        userName2 = state.userName2) => {
             state.playerData =  {
                 playerOneName : `${userName1}`,

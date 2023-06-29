@@ -7,12 +7,14 @@ import {useDispatch, useSelector} from "react-redux";
 //import {handleSubmit} from "../../state/battle/battle.action";
 //import {handleReset,handleReset2} from "../../state/battle/battle.action";
 import {handleReset,handleReset2} from "../../state/battle/battle.slice";
+import {FC, ReactElement} from "react";
+import { IPlayerData} from "../../state/types/battle.types";
 
-const Battle = () => {
+const Battle:FC  = ():ReactElement  => {
     const dispatch = useDispatch()
-    const playerData = useSelector(state => state.battle.playerData)
-    const loading = useSelector(state => state.battle.loading)
-    const error = useSelector(state => state.battle.error)
+    const playerData:IPlayerData = useSelector((state) => state.battle.playerData)
+    const loading:boolean = useSelector(state => state.battle.loading)
+    const error:string = useSelector(state => state.battle.error)
 
 /*
 useEffect(()=>{
