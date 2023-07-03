@@ -15,7 +15,6 @@ const Battle:FC  = ():ReactElement  => {
     const playerData:IPlayerData = useSelector((state) => state.battle.playerData)
     const loading:boolean = useSelector(state => state.battle.loading)
     const error:string = useSelector(state => state.battle.error)
-
 /*
 useEffect(()=>{
     },[playerData])
@@ -94,6 +93,25 @@ useEffect(()=>{
             </Link> :
             null
             }
+            <div className="animation-container">
+                <div className ="lightning-container">
+                    <div className ="lightning white"></div>
+                    <div className ="lightning red"></div>
+                </div>
+                <div className ="boom-container">
+                    <div className ="shape circle big white"></div>
+                    <div className ="shape circle white"></div>
+                    <div className="shape triangle big yellow"></div>
+                    <div className="shape disc white"></div>
+                    <div className ="shape triangle blue"></div>
+                </div>
+                <div className ="boom-container second">
+                    <div className ="shape circle big white"></div>
+                    <div className ="shape circle white"></div>
+                    <div className ="shape disc white"></div>
+                    <div className ="shape triangle blue"></div>
+                </div>
+            </div>
         </div>
     )
 }

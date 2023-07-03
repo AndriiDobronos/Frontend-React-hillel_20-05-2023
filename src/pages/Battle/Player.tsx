@@ -7,7 +7,7 @@ const Player:FC  = memo(({label, profile }):ReactElement => {
         <div>
             <h1 className='header'>{label}</h1>
             <h3 style={{textAlign: 'center'}}></h3>
-            <PlayerPreview avatar={profile.avatar_url} username={profile.login}>
+            <PlayerPreview avatar={profile.avatar_url} username={profile.login} >
                 <ul className="space-list-items">
                     {profile.name ? <li>{profile.name}</li> : null}
                     {profile.location ? <li>{profile.location}</li> : null}

@@ -1,12 +1,13 @@
 import {FC, ReactElement, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-import {makeBattle} from "../../requests";
+import {makeBattle,handleError} from "../../requests";
 import Player from "./Player";
 import {useDispatch, useSelector} from "react-redux";
 import {getParamsFailureAction,setWinnerAction,setLoserAction } from "../../state/battle/battle.slice";
 import {resetLoadingAction} from "../../state/battle/battle.slice";
 import Loader from "../Popular/Loader";
-//import {getResult} from "../../state/battle/battle.thunk";
+import {getResult} from "../../state/battle/battle.thunk";
+//import {handleError} from "../../state/battle/battle.slice";
 
 const Results:FC  = ():ReactElement => {
     const dispatch = useDispatch()
@@ -28,8 +29,8 @@ const Results:FC  = ():ReactElement => {
 //    const [loser, setLoser] = useState(null)
 
     useEffect(() => {
-//        dispatch(getResult(params))
-    const  getResult = (async () => {
+        dispatch(getResult(params))
+/*    const  getResult = (async () => {
     return  await makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)])
         .then(([winner, loser]) => {
             dispatch(setWinnerAction(winner));
@@ -37,7 +38,7 @@ const Results:FC  = ():ReactElement => {
         })
         .catch((error) => dispatch(getParamsFailureAction(error)))
         .finally(() => dispatch(resetLoadingAction()))
-    })()
+    })()*/
 /*
        makeBattle([params.get(`playerOneName`), params.get(`playerTwoName`)])
            .then(([winner, loser]) => {

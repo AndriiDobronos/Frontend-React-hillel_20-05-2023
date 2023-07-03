@@ -15,8 +15,8 @@ const initialState:IBattleStore = {
     userName2: '',
     loading: true,
     error: null,
-    winner: null,
-    loser: null,
+    winner: {score:0,profile:{avatar_url:'',login:''}},
+    loser: {score:0,profile:{avatar_url:'',login:''}},
 };
 
 const battleSlice:Slice<IBattleStore>  = createSlice({
@@ -47,7 +47,7 @@ const battleSlice:Slice<IBattleStore>  = createSlice({
                 playerOneName : '',
                 playerTwoName: state.userName2,
                 playerOneImage:  null,
-                playerTwoImage: ` https://github.com/${userName2}.png?size200`,
+                playerTwoImage:` https://github.com/${userName2}.png?size200`,
             }
         },
         handleReset2: (state:IBattleStore , action:AnyAction,userName1 = state.userName1,
@@ -100,10 +100,8 @@ const battleSlice:Slice<IBattleStore>  = createSlice({
             },
         );
     },
-
 });
 export const {getUserName, getUserName2,handleSubmit,handleSubmit2,handleReset,
     handleReset2,setWinnerAction,setLoserAction,resetLoadingAction,getParamsFailureAction} = battleSlice.actions;
 
 export default battleSlice.reducer
-
